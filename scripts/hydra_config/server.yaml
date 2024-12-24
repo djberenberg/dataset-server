@@ -9,3 +9,4 @@ server:
     records:
       _target_: dataset_server.functional.read_jsonl
       filename: ???
+      gzip_compressed: true
