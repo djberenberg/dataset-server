@@ -1,6 +1,8 @@
 defaults:
   - _self_
 
+first_n: 5
+
 client:
   _target_: dataset_server.DatasetProxy
   server_address: ???

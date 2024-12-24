@@ -19,7 +19,8 @@ def main(config: DictConfig):
 
     dataset: DatasetProxy = hydra.utils.instantiate(config.client)
 
-    for i in range(len(dataset)):
+    print()
+    for i in range(config.first_n if config.first_n is not None else len(dataset)):
         record = dataset[i]
         print(record)
 
