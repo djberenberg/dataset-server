@@ -28,7 +28,7 @@ class DatasetProxy(Dataset):
 
     @cache
     def socket(self) -> zmq.Socket:
-        sock = self.zmq_context().socket(zmq.REQ)
+        sock = self.zmq_context().socket(zmq.DEALER)
         sock.connect(self.server_address)
         return sock
 
@@ -40,6 +40,7 @@ class DatasetProxy(Dataset):
         message = {
             "command": self.get_method,
             "args": [index],
+            "kwargs": {},
             "context": self.context,
         }
 
@@ -47,5 +48,5 @@ class DatasetProxy(Dataset):
         return reply["response"]
 
     def __len__(self) -> int:
-        message = {"command": self.len_method, "context": self.context}
+        message = {"command": self.len_method, "args": [], "kwargs": {}, "context": self.context}
         return cast(int, send_request(message, self.socket())["response"])

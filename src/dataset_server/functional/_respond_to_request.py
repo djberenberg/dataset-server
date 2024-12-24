@@ -9,7 +9,7 @@ from ._handle_request import handle_request
 
 
 def respond_to_request(
-    client: bytes, request: Request, server_socket: zmq.Socket[zmq.ROUTER], request_handler: Any
+    client: bytes, request: Request, server_socket: zmq.Socket, request_handler: Any
 ):
     response = handle_request(request, request_handler)
     response_json_msg = json.dumps(response).encode()

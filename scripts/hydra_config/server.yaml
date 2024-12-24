@@ -1,0 +1,15 @@
+defaults:
+  - _self_
+
+server:
+  _target_: dataset_server.DatasetServer
+
+  port: 9990
+  name: null
+
+  dataset:
+    _target_: dataset_server.datasets.JSONRecordDataset
+    records:
+      _target_: dataset_server.functional.read_jsonl
+      filename: ???
+      gzip_compressed: true

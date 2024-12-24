@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+
+first_n: 5
+
+client:
+  _target_: dataset_server.DatasetProxy
+  server_address: ???
+  get_method: __getitem__
+  len_method: __len__
