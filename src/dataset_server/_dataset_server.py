@@ -11,19 +11,19 @@ from dataset_server.functional import respond_to_request
 
 class DatasetServer:
     def __init__(
-        self, dataset: Dataset, port: int, server_name: Optional[str] = None, _protocol: str = "tcp"
+        self, dataset: Dataset, port: int, name: Optional[str] = None, _protocol: str = "tcp"
     ):
         self.request_handler = dataset
 
         self.host = socket.gethostname()
         self.port = port
 
-        self.server_name = server_name or self.__class__.__name__
+        self.server_name = name or self.__class__.__name__
         self._protocol = _protocol
 
         self.address = f"{self._protocol}://{self.host}:{self.port}"
         self.logger = logging.getLogger(f"{self.server_name}@{self.address}")
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
 
     def serve(self):
 
@@ -48,7 +48,7 @@ class DatasetServer:
                         client, request = message
                         self.logger.debug(f"Responding to client: {client}")
                         respond_to_request(
-                            client, json.loads(request.decode()), frontend, self.dataset
+                            client, json.loads(request.decode()), frontend, self.request_handler
                         )
                     except zmq.Again:
                         break
