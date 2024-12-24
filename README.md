@@ -34,7 +34,7 @@ The output should look similar to this:
 [2024-12-24 15:10:06,090][swissprot@tcp://canopy.home:9990][INFO] - Starting server
 ```
 
-# client
+## client
 With the server started, you can now access it remotely. To run the example client, you must know the server's address.
 
 Run:
